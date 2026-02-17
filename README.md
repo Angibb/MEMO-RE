@@ -1,2 +1,2 @@
 # MEMO-RE
-web application thatallows user to create and track memos
+web application that allows user to create and track memos

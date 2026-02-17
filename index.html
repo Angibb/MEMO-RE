@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<!--
+	Angela Gibbons
+	Assignment 3
+	ITD-212
+	-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Assignment 3-Angela Gibbons</title>
+	<style>
+	body{
+		padding: 0;
+		margin: 0;
+		background-color: floralwhite;
+		}
+	header{
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		background-color: darkslateblue;
+		font-size: x-large;
+		margin-bottom: 5rem;
+		opacity: .45;
+		/*makes header scroll with page remove next three line if no longer want*/
+		position: sticky;
+		top: 0;
+		z-index: 1000;
+		h1{
+			filter:drop-shadow(1px 1px 1px black);
+			padding-left: 0.5rem;
+			margin:0.50rem;
+			color: white;
+		}
+	}
+	main{
+		margin: 2rem;
+		padding: 2rem;
+		/*makes lined paper background design
+		background-color: white;
+		background-image: repeating-linear-gradient(
+		to bottom,
+		transparent,
+		transparent 27px, 		/* Adjust for line spacing */
+		cornflowerblue 29px,         /* Line color and thickness */
+		cornflowerblue 27px          /* Line color and thickness */
+		);*/
+	}
+	#container{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: auto;
+		margin-bottom: 3rem;
+		padding: 0.35rem;
+		width: 60%;
+		border-radius: 10px;
+		background-color: lavender;
+		color: black;
+		filter:drop-shadow(5px 2px 2px slateblue);
+		border: 5px double slateblue;
+		opacity: .85;
+		h3{
+			margin: 1rem;
+			padding: 0.50rem;
+			color: slateblue;
+			}
+		}
+		form{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		color: white;
+		margin: 0.75rem;
+		padding: 0.25rem;
+		border-radius: 8px;
+		filter:drop-shadow(2px 1px 1px mediumslateblue)
+		}
+		form button{
+			background-color: slateblue;
+			color: white;
+			padding: 0.50rem;
+			margin: 0.50rem;
+			align-items:center;
+			cursor: pointer;
+			border: none;
+			border-radius: 8px;
+		}
+	.header{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: auto;
+		margin-bottom: 1.5rem;
+		padding: 0.5rem;
+		max-width: 55%;
+		background-color: slateblue;
+		filter:drop-shadow(5px 3px 3px slateblue);
+		border: 5px double thistle;
+		border-radius: 5px;
+		color: white;
+	}
+	
+	#board ul{
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		margin: auto;
+		margin-bottom: 3rem;
+		padding: 2rem;
+		width: 65%;
+		border: 5px double slateblue;
+		border-radius: 5px;
+		color: slateblue;
+		background-color: lavender;
+		opacity: .85;
+		filter:drop-shadow(3px 3px 3px slateblue);
+		list-style-type:none; /*remove bullets from list items*/
+		li{
+			margin: 0.50rem;
+			padding:0.65rem;
+			background-color:lemonchiffon;
+			border-radius: 2px;
+			border: 1px solid goldenrod;
+			text-wrap: wrap;
+			flex:1 1 auto;
+			max-width: 200px
+		}
+	}
+
+	</style>
+</head>
+<body>
+<header>
+	<h1>MEMO/RE</h1>
+</header>
+<main>
+	<h1 class="header">LOG NEW MEMO/RE</h1>
+	<div id="container">
+	<h3>This app allows you to create and track memos and tasks for yourself or other users.</h3>
+		<form id="form" action="http://localhost:4000" method="post">
+			<label><h2>Who is this memo for:</h2></label>
+			<input type="text" id="memoName" name="memoName" placeholder="Please type name here...">
+			<label><h2>Enter note/task here:</h2> </label>
+			<textarea type="textarea" id="userMemo" name="userMemo" 
+			placeholder="Type your note/task here and then click the submit button to add it to the board..." 
+			style="height: 200px;" maxlength="300"></textarea>
+			<button id="submit-button">Submit</button>
+		</form>
+	</div>
+	
+	<h1 class="header">MEMO/RE BOARD</h1>
+	
+	<div id="board">
+	</div>
+</main>
+<footer></footer>
+<script>
+//Loads memos into board div via fetch from the db clip_board notes collection 
+  window.onload = async function() {
+    const response = await fetch('/memos');
+    const memosHtml = await response.text();
+    document.getElementById('board').innerHTML = memosHtml;
+  };
+</script>
+
+</body>
+
+</html>
